@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
 import song from './song.mp3';
 import './gita.css'
 function GitaQuery() {
   const [query, setQuery] = useState('');
   const [response, setResponse] = useState('');
   const audio = new Audio(song);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     setResponse('');
-    
+   
+
     audio.play();
     const url = `https://nod.himasaini6.repl.co/gita?q=${encodeURIComponent(query)}`;
     const response = await fetch(url);
     const data = await response.json();
-    setResponse(data.response);
+    setResponse(data.response.replace(/GitaGpt\.org/g, 'Gita AI'));
     console.log(data.response);
 
 
