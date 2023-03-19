@@ -2,26 +2,22 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
-
+.con{
+  padding: 10%;
+}
 .count-input {
   border: solid;
   background-color: #f7f7f7;
-  padding: 0.5rem;
+  padding: 1rem;
   font-size: 1rem;
   border-radius: 4px;
   width: 100%;
   margin-bottom: 1rem;
   color: #2b2b2b;
+
 }
 .res{
-  border: solid;
-  background-color: #f7f7f7;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  width: 100%;
-  margin-bottom: 1rem;
-  color: #2b2b2b;
+  
 }
 .submit-button {
   background-color: #3b3b3b;
