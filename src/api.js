@@ -33,7 +33,7 @@ function GitaQuery() {
       {response && (
         <div>
           <h2>Solution:</h2>
-          <p className='res'>{response}</p>
+          <p className='count-input '>{response}</p>
         </div>
       )}
     </div>

@@ -2,6 +2,10 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
+
+body{
+  background-color: rgb(174, 235, 235);
+}
 .con{
   padding: 10%;
 }
