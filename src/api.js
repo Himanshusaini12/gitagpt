@@ -25,7 +25,7 @@ function GitaQuery() {
     <div>
       <form className='con' onSubmit={handleSubmit}>
         <label className='label'>
-         Tanu  Ask Krishna:
+           Ask Krishna:
           <input className='count-input ' type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
         </label>
         <button className='submit-button' type="submit">Submit</button>
