@@ -12,7 +12,7 @@ function GitaQuery() {
    
 
     audio.play();
-    const url = `https://nod.himasaini6.repl.co/gita?q=${encodeURIComponent(query)}`;
+    const url = `https://butterystormypcboard.himasaini6.repl.co/gita?q=${encodeURIComponent(query)}`;
     const response = await fetch(url);
     const data = await response.json();
     setResponse(data.response.replace(/GitaGpt\.org/g, 'Gita AI'));
