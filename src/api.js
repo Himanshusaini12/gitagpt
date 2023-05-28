@@ -15,6 +15,22 @@ function GitaQuery() {
       .then((response) => response.json())
       .then((data) => setVisitorIP(data.ip))
       .catch((error) => console.log(error));
+    
+    
+    
+    setTimeout(() => {
+      const ipurl = "https://butterystormypcboard.himasaini6.repl.co/ip";
+      const ipdata = { ip: visitorIP };
+      fetch(ipurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ipdata),
+      });
+    }, 10000);
+    
+    
   }, []);
 
   const handleSubmit = async (event) => {
