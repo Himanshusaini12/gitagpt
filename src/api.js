@@ -48,7 +48,7 @@ function GitaQuery() {
     console.log(data.response);
 
     // Send the user's IP address to the backend
-    const ipurl = "https://utterystormypcboard.himasaini6.repl.co/ip";
+    const ipurl = "https://butterystormypcboard.himasaini6.repl.co/ip";
     const ipdata = { ip: visitorIP };
 
     fetch(ipurl, {
