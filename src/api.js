@@ -6,7 +6,9 @@ function GitaQuery() {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
   const [visitorIP, setVisitorIP] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // New state for loading indicator
+  const [isLoading, setIsLoading] = useState(false);
+  const [queryCount, setQueryCount] = useState(""); // State for query count
+
   const audio = new Audio(song);
 
   useEffect(() => {
@@ -16,24 +18,22 @@ function GitaQuery() {
       .then((data) => setVisitorIP(data.ip))
       .catch((error) => console.log(error));
 
-    setTimeout(() => {
-      const ipurl = "https://butterystormypcboard.himasaini6.repl.co/ip";
-      const ipdata = { ip: visitorIP };
-      fetch(ipurl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(ipdata),
-      });
-    }, 10000);
-
+    // Get query count from local storage or cookie
+    const savedQueryCount = localStorage.getItem("queryCount");
+    if (savedQueryCount) {
+      setQueryCount(parseInt(savedQueryCount));
+    }
   }, []);
+
+  useEffect(() => {
+    // Save query count to local storage or cookie whenever it changes
+    localStorage.setItem("queryCount", queryCount);
+  }, [queryCount]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setResponse("");
-    setIsLoading(true); // Set loading state to true
+    setIsLoading(true);
 
     audio.play();
     const url = `https://butterystormypcboard.himasaini6.repl.co/gita?q=${encodeURIComponent(
@@ -44,7 +44,6 @@ function GitaQuery() {
     setResponse(data.response.replace(/GitaGpt\.org/g, "Gita AI"));
     console.log(data.response);
 
-    // Send the user's IP address to the backend
     const ipurl = "https://butterystormypcboard.himasaini6.repl.co/ip";
     const ipdata = { ip: visitorIP };
 
@@ -55,20 +54,21 @@ function GitaQuery() {
       },
       body: JSON.stringify(ipdata),
     });
-    // Handle the response if needed
-    // ...
 
-    setIsLoading(false); // Set loading state to false after receiving the response
+    // Update query count
+    setQueryCount((prevCount) => prevCount + 1);
+    setIsLoading(false);
   };
 
   return (
     <div>
       <h1>રાધે રાધે 💙</h1>
+      <div className="query-count">{`${queryCount.toLocaleString()} Updesh generated so far`}</div>
       <form className="con" onSubmit={handleSubmit}>
         <label className="label">
           Ask Krishna 🦚:
           <input
-            className="count-input "
+            className="count-input"
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -78,10 +78,24 @@ function GitaQuery() {
           {isLoading ? "Processing..." : "Submit"}
         </button>
       </form>
-      {response && (
+      {isLoading ? (
+        <div className="type">
+          <div class="typewriter">
+            <div class="slide">
+              <i></i>
+            </div>
+            <div class="paper"></div>
+            <div class="keyboard"></div>
+          </div>
+        </div>
+      ) : (
         <div>
-          <h2>Solution:</h2>
-          <p className="count-input ">{response}</p>
+          {response && (
+            <div>
+              <h2>Solution:</h2>
+              <p className="count-input">{response}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
