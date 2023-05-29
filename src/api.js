@@ -27,6 +27,7 @@ function GitaQuery() {
         body: JSON.stringify(ipdata),
       });
     }, 10000);
+
   }, []);
 
   const handleSubmit = async (event) => {
