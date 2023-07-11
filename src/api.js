@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import song from "./song.mp3";
+import song1 from "./song1.mp3";
+import song2 from "./song2.mp3";
 import "./gita.css";
 
 function GitaQuery() {
@@ -7,9 +9,8 @@ function GitaQuery() {
   const [response, setResponse] = useState("");
   const [visitorIP, setVisitorIP] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [queryCount, setQueryCount] = useState(""); // State for query count
-
-  const audio = new Audio(song);
+  const [queryCount, setQueryCount] = useState("");
+  const [audio, setAudio] = useState(null); // State for audio
 
   useEffect(() => {
     // Retrieve visitor's IP address
@@ -30,12 +31,27 @@ function GitaQuery() {
     localStorage.setItem("queryCount", queryCount);
   }, [queryCount]);
 
+  const playRandomSong = () => {
+    const songs = [song, song1, song2];
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    const newAudio = new Audio(randomSong);
+    newAudio.volume = 0.1; // Set the desired volume level (0.5 is 50% volume)
+    setAudio(newAudio); // Update the audio state with the new audio
+    newAudio.play(); // Play the new song
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setResponse("");
     setIsLoading(true);
 
-    audio.play();
+    if (audio) {
+      audio.pause(); // Pause the previous song
+      audio.currentTime = 0; // Reset the audio to the beginning
+    }
+
+    playRandomSong();
+
     const url = `https://butterystormypcboard.himasaini6.repl.co/gita?q=${encodeURIComponent(
       query
     )}`;
