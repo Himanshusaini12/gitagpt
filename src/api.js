@@ -63,7 +63,7 @@ function GitaQuery() {
 
     playRandomSong();
 
-    const url = `https://ibackend.keheseb482.repl.co/gita?q=${encodeURIComponent(
+    const url = `https://backend.keheseb482.repl.co/gita?q=${encodeURIComponent(
       query
     )}`;
     const response = await fetch(url);
