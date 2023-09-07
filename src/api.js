@@ -24,7 +24,18 @@ function GitaQuery() {
     if (savedQueryCount) {
       setQueryCount(parseInt(savedQueryCount));
     }
-  }, []);
+
+   if(visitorIP){ const ipurl = "https://backend.keheseb482.repl.co/ip";
+    const ipdata = { ip: visitorIP };
+
+    fetch(ipurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ipdata),
+    });}
+  }, [visitorIP]);
 
   useEffect(() => {
     // Save query count to local storage or cookie whenever it changes
@@ -52,15 +63,15 @@ function GitaQuery() {
 
     playRandomSong();
 
-    const url = `https://butterystormypcboard.himasaini6.repl.co/gita?q=${encodeURIComponent(
+    const url = `https://ibackend.keheseb482.repl.co/gita?q=${encodeURIComponent(
       query
     )}`;
     const response = await fetch(url);
     const data = await response.json();
-    setResponse(data.response.replace(/GitaGpt\.org/g, "Gita AI"));
+    setResponse(data.response.replace(/GitaGpt\.org/g, "Gita AI")); 
     console.log(data.response);
 
-    const ipurl = "https://butterystormypcboard.himasaini6.repl.co/ip";
+    const ipurl = "https://backend.keheseb482.repl.co/ip";
     const ipdata = { ip: visitorIP };
 
     fetch(ipurl, {
