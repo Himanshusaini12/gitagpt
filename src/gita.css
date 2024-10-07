@@ -324,9 +324,27 @@ body {
       60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
   }
 }
+.quill-text {
+  font-family:'Comic Sans MS', cursive;
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: #000;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 
-.type {
-  position: relative;
-  margin-left: 35%;
-  margin-top: 20px;
+.quill {
+  display: inline-block;
+  font-size: 1.5em;
+  margin-left: 10px;
+  animation: writeQuill 0.5s infinite alternate;
+}
+
+@keyframes writeQuill {
+  from {
+    transform: rotate(-5deg) translateY(0);
+  }
+  to {
+    transform: rotate(5deg) translateY(-5px);
+  }
 }
