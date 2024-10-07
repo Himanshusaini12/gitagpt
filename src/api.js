@@ -72,7 +72,7 @@ function GitaQuery() {
     playRandomSong();
 
     try {
-      const url = `http://207.148.124.39:4000/ask-gita`;
+      const url = `http://trainapi.onrender.com/ask-gita`;
       const { data } = await axios.get(url, {
         params: { query: query }
       });
