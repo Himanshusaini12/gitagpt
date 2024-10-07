@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import song from "./song.mp3";
 import song1 from "./song1.mp3";
 import song2 from "./song2.mp3";
@@ -15,9 +16,8 @@ function GitaQuery() {
   const [isWriting, setIsWriting] = useState(false);
 
   useEffect(() => {
-    fetch("https://api.ipify.org/?format=json")
-      .then((response) => response.json())
-      .then((data) => setVisitorIP(data.ip))
+    axios.get("https://api.ipify.org/?format=json")
+      .then((response) => setVisitorIP(response.data.ip))
       .catch((error) => console.log(error));
 
     const savedQueryCount = localStorage.getItem("queryCount");
@@ -72,15 +72,17 @@ function GitaQuery() {
     playRandomSong();
 
     try {
-      const url = `http://207.148.124.39:4000/ask-gita?query=${encodeURIComponent(query)}`;
-      const response = await fetch(url);
-      const data = await response.json();
+      const url = `http://207.148.124.39:4000/ask-gita`;
+      const { data } = await axios.get(url, {
+        params: { query: query }
+      });
       const formattedResponse = data.response.replace(/GitaGpt\.org/g, "Gita AI");
       setResponse(formattedResponse);
       setIsWriting(true);
       setQueryCount((prevCount) => prevCount + 1);
     } catch (error) {
       console.error('Error fetching response:', error);
+      setResponse("An error occurred while fetching the response. Please try again.");
     }
 
     setIsLoading(false);
